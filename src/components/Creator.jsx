@@ -17,11 +17,11 @@ function Creator({ setItems}) {
 	return (
 		<div className="creator">
 			<input
-				onKeyPress={(e) => e.key === "Enter" && addItem(title)}
+				onKeyPress={(e) => title && e.key === "Enter" && addItem(title)}
 				value={title}
 				onChange={(e) => setTitle(e.target.value)}
 				placeholder="Введите название задачи..."
-				className="bg-stone-600 rounded-2xl"
+				className="bg-stone-600 rounded-2xl hover:border-violet-600 focus:border-violet-600"
 				type="text"
 				name="title"
 				id=""

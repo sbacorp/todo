@@ -53,6 +53,7 @@ body {
 		font-weight: 800;
 		margin-bottom: 50px;
 	}
+	
 }
 .creator{
 		display: flex;
@@ -67,10 +68,6 @@ body {
 		line-height: 1.5;
 		width: 400px;
 		border: 2px solid transparent;
-		&:focus{
-			border: 2px solid aqua;
-
-		}
 	}
 	& button{
 		font-weight: 600;
@@ -110,6 +107,7 @@ body {
 	margin-bottom: 5px;
 	font-size: 18px;
 	color: #fff;
+	@include noselect();
 }
 &__item{
 	padding:0 0 0 20px ;

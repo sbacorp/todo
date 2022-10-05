@@ -16,7 +16,34 @@ function App() {
 		const newItems = items.filter((obj) => obj.id !== id);
 		setItems(newItems);
 	};
+	const [currentList, setCurrentList] = useState(0);
 
+	const list =
+		currentList === 0
+			? items
+					.filter((obj) => obj.isCompleted === false)
+					.map((obj) => {
+						return (
+							<TodoItem
+								changeItem={changeItem}
+								removeItem={removeItem}
+								key={obj.id}
+								item={obj}
+							/>
+						);
+					})
+			: items
+					.filter((obj) => obj.isCompleted === true)
+					.map((obj) => {
+						return (
+							<TodoItem
+								changeItem={changeItem}
+								removeItem={removeItem}
+								key={obj.id}
+								item={obj}
+							/>
+						);
+					});
 
 	return (
 		<div className="container md:container md:mx-auto px-4">
@@ -24,43 +51,30 @@ function App() {
 				<div className="content__title">TODO</div>
 				<Creator setItems={setItems} />
 				<div className="todo__list">
-					<div className="todo__count">
-						Активные -
-						{
-							items.filter((obj) => obj.isCompleted === false)
-								.length
-						}
+					<div className="flex justify-between mb-10">
+						<div
+							onClick={() => setCurrentList(0)}
+							className="todo__count border-2 p-2 w-fit rounded-2xl hover:bg-violet-600 active:translate-y-1"
+						>
+							Активные :{" "}
+							{
+								items.filter((obj) => obj.isCompleted === false)
+									.length
+							}
+						</div>
+						<div
+							onClick={() => setCurrentList(1)}
+							className="todo__count border-2 p-2 w-fit rounded-2xl hover:bg-violet-600 active:translate-y-1"
+						>
+							Заавершенные :{" "}
+							{
+								items.filter((obj) => obj.isCompleted === true)
+									.length
+							}
+						</div>
 					</div>
-					{items
-						.filter((obj) => obj.isCompleted === false)
-						.map((obj) => {
-							return (
-								<TodoItem
-									changeItem={changeItem}
-									removeItem={removeItem}
-									key={obj.id}
-									item={obj}
-								/>
-							);
-						})}
-				</div>
-				<div className="todo__list">
-					<div className="todo__count">
-						Заавершенные -
-						{items.filter((obj) => obj.isCompleted === true).length}
-					</div>
-					{items
-						.filter((obj) => obj.isCompleted === true)
-						.map((item) => {
-							return (
-								<TodoItem
-									changeItem={changeItem}
-									removeItem={removeItem}
-									item={item}
-									key={item.id}
-								/>
-							);
-						})}
+
+					{list}
 				</div>
 			</div>
 		</div>
